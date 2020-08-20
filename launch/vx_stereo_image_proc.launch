@@ -5,7 +5,8 @@
   <arg name="respawn" default="false" />
   <arg name="left" default="left" />
   <arg name="right" default="right" />
-  <arg name="approximate_sync" default="false" />
+  <arg name="approximate_sync" default="true" />
+   <arg name="q_size" value="10" />		<!-- Image Queue Size -->
 
   <arg     if="$(arg respawn)" name="bond" value="" />
   <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
@@ -29,6 +30,7 @@
         args="load gpu_stereo_image_proc/vx_disparity $(arg manager) $(arg bond)"
 	respawn="$(arg respawn)" >
     <param name="approximate_sync" value="$(arg approximate_sync)" />
+      <param name="queue_size" value="$(arg q_size)" />
   </node>
 
   <!-- PointCloud2 -->
@@ -36,9 +38,10 @@
         args="load stereo_image_proc/point_cloud2 $(arg manager) $(arg bond)"
 	respawn="$(arg respawn)" >
     <param name="approximate_sync" value="$(arg approximate_sync)" />
+      <param name="queue_size" value="$(arg q_size)" />
   </node>
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_tmp" args="0 0 0 0 1.57079632679 0 map tmp" ns="stereo" />
-  <node pkg="tf2_ros" type="static_transform_publisher" name="tmp_to_cameraLeft" args="0 0 0 -1.57079632679 0 0 tmp cameraLeft" ns="stereo" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tmp_to_cameraLeft" args="0 0 0 -1.57079632679 0 0 tmp cam_link" ns="stereo" />
   
 </launch>
