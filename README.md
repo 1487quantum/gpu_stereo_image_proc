@@ -75,6 +75,12 @@ Note: `disparity` and `points2` topics are remapped with `libsgm_` prefix (libSG
 
 See https://youtu.be/whCAjrDg9_A
 
+### TF Publisher
+
+Corrects the point cloud orientation with `static_transfrom_publisher` in Rviz.
+
+> cam_link <- tmp <- map
+
 ## Licenses
 
 - This package is distributed under the [3-Clause BSD License](https://opensource.org/licenses/BSD-3-Clause).
